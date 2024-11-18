@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { dashboardContent } from "../utils/constants";
 import { RiExchangeLine } from "react-icons/ri";
+import { FaUserCircle } from "react-icons/fa";
 
 interface NavbarProps {
   className?: string;
@@ -30,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
 
   return (
     <div className={`w-full ${className}`}>
-      <nav className="h-16 flex justify-between lg:justify-end items-center   relative z-10 px-5">
+      <nav className="h-16 flex justify-between lg:justify-end items-center  bg-white  relative z-10 px-5">
         <Link
           to={"/"}
           className="flex lg:hidden justify-center items-center gap-2 py-4"
@@ -46,11 +47,8 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
             className="relative group cursor-pointer"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
-            <img
-              className="w-11 h-11 border-2 p-1 border-gray-300 rounded-full "
-              src="/User1.png"
-              alt="User Avatar"
-            />
+            {" "}
+            <FaUserCircle size={35} className="text-gray-400" />
             <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
           </div>
 
