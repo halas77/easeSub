@@ -1,45 +1,66 @@
-// // SPDX-License-Identifier: MIT
-// pragma solidity ^0.8.24;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
 
-// import "./SubscriptionManager.sol";
+import "./SubscriptionManager.sol";
 
-// contract DynamicPricing is SubscriptionManager {
+contract DynamicPricing is SubscriptionManager {
+    constructor(IERC20 _usdeToken) SubscriptionManager(_usdeToken) {}
 
+    function setServicePrice(uint8 _serviceId, uint128 newPrice) external {
+        Service storage service = services[_serviceId];
+        require(
+            service.serviceProvider != address(0),
+            "Service does not exist"
+        );
 
-//     function setServicePrice(uint256 serviceId, uint256 newPrice) external onlyOwner {
-//         require(newPrice > 0, "Price must be greater than 0");
+        // Only the service provider can update the price
+        require(
+            service.serviceProvider == msg.sender,
+            "Only service owner can update the price"
+        );
 
-//         services[serviceId].price = newPrice;
-//     }
+        // Update the price
+        service.price = newPrice;
+    }
 
-//     function applyDiscount(uint256 serviceId, address user) public view returns (uint256) {
-//         Subscription memory sub = subscriptions[user][serviceId];
-//         require(sub.active, "Subscription is inactive");
+    function applyDiscount(
+        uint8 _serviceId,
+        address user
+    ) public view returns (uint128) {
+        Subscription memory sub = subscriptions[user][_serviceId];
+        require(sub.active, "Subscription is inactive");
 
-//         uint256 discount;
+        uint128 discount;
 
-        
-//         if (block.timestamp >= sub.nextPaymentDate - (6 * 30 days)) {
-//             discount = (sub.amount * 5) / 100;
-//         }
+        if (block.timestamp >= sub.nextPaymentDate - (6 * 30 days)) {
+            discount = (sub.price * 5) / 100;
+        }
 
-//         return sub.amount - discount;
-//     }
+        return sub.price - discount;
+    }
 
-//     function adjustPrice(uint256 serviceId) public onlyOwner {
-//         Service storage service = services[serviceId];
+    function adjustPrice(uint8 _serviceId) public {
+        Service storage service = services[_serviceId];
 
-//         uint256 newPrice = service.price + (service.price * 2) / 100;
-//         service.price = newPrice;
-//     }
+        require(
+            service.serviceProvider == msg.sender,
+            "Only service owner can update the price."
+        );
 
-//     function getDynamicPrice(uint256 serviceId, address user) public view returns (uint256) {
-//         Subscription memory sub = subscriptions[user][serviceId];
+        uint128 newPrice = service.price + (service.price * 2) / 100;
+        service.price = newPrice;
+    }
 
-//         uint256 finalPrice = sub.amount;
+    function getDynamicPrice(
+        uint8 _serviceId,
+        address user
+    ) public view returns (uint128) {
+        Subscription memory sub = subscriptions[user][_serviceId];
 
-//         finalPrice = applyDiscount(serviceId, user);
+        uint128 finalPrice = sub.price;
 
-//         return finalPrice;
-//     }
-// }
+        finalPrice = applyDiscount(_serviceId, user);
+
+        return finalPrice;
+    }
+}
