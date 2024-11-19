@@ -3,9 +3,15 @@ pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 
-contract SubscriptionManager is Ownable {
+contract SubscriptionManager is Ownable, AccessControl {
     IERC20 public usdeToken;
+
+    uint8 public serviceId;
+
+    bytes32 public constant SERVICE_PROVIDER = keccak256("SERVICE_PROVIDER");
+
     enum Duration {
         Monthly,
         Yearly
@@ -20,13 +26,13 @@ contract SubscriptionManager is Ownable {
     struct Subscription {
         address subscriber;
         uint128 price;
-        uint64 nextPaymentDate;
+        uint256 nextPaymentDate;
         bool active;
         Duration duration;
     }
 
-    mapping(uint256 => Service) public services;
-    mapping(address => mapping(uint256 => Subscription)) public subscriptions;
+    mapping(uint8 => Service) public services;
+    mapping(address => mapping(uint8 => Subscription)) public subscriptions;
 
     event ServiceCreated(
         uint64 indexed serviceId,
@@ -54,12 +60,15 @@ contract SubscriptionManager is Ownable {
     );
 
     constructor(IERC20 _usdeToken) Ownable(msg.sender) {
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         usdeToken = _usdeToken;
     }
 
-    function createService(uint64 serviceId, uint128 price) external onlyOwner {
+    function createService(uint128 price) external onlyRole(SERVICE_PROVIDER) {
         require(price > 0, "Price must be greater than 0");
         require(!services[serviceId].active, "Service already exists");
+
+        serviceId++;
 
         services[serviceId] = Service({
             serviceProvider: msg.sender,
@@ -70,49 +79,58 @@ contract SubscriptionManager is Ownable {
         emit ServiceCreated(serviceId, msg.sender, price);
     }
 
-    function createSubscription(uint64 serviceId, Duration duration) external {
-        require(services[serviceId].active, "Service is inactive");
-        Service storage service = services[serviceId];
-        Subscription storage sub = subscriptions[msg.sender][serviceId];
+    function createSubscription(uint8 _serviceId, Duration duration) external {
+        require(services[_serviceId].active, "Service is inactive");
+        Service storage service = services[_serviceId];
+        Subscription storage sub = subscriptions[msg.sender][_serviceId];
 
         require(!sub.active, "Subscription already exists");
 
         uint128 subscriptionAmount = calculateSubscriptionAmount(
-            serviceId,
+            _serviceId,
             duration
         );
 
+        require(
+            usdeToken.transferFrom(
+                msg.sender,
+                service.serviceProvider,
+                subscriptionAmount
+            ),
+            "Payment failed"
+        );
+
         sub.subscriber = msg.sender;
-        sub.amount = subscriptionAmount;
+        sub.price = subscriptionAmount;
         sub.nextPaymentDate =
             block.timestamp +
             (duration == Duration.Monthly ? 30 days : 365 days);
         sub.active = true;
         sub.duration = duration;
 
-        emit SubscriptionCreated(msg.sender, serviceId, service.price);
+        emit SubscriptionCreated(msg.sender, _serviceId, service.price);
     }
 
-    function cancelSubscription(uint256 serviceId) external {
-        Subscription storage sub = subscriptions[msg.sender][serviceId];
+    function cancelSubscription(uint8 _serviceId) external {
+        Subscription storage sub = subscriptions[msg.sender][_serviceId];
         require(sub.active, "Subscription is inactive");
 
         sub.active = false;
 
-        emit SubscriptionCancelled(msg.sender, serviceId);
+        emit SubscriptionCancelled(msg.sender, _serviceId);
     }
 
-    function executePayment(uint256 serviceId) external {
-        Subscription storage sub = subscriptions[msg.sender][serviceId];
+    function executePayment(uint8 _serviceId) external {
+        Subscription storage sub = subscriptions[msg.sender][_serviceId];
         require(sub.active, "Subscription is inactive");
         require(block.timestamp >= sub.nextPaymentDate, "Payment not due yet");
 
-        Service storage service = services[serviceId];
+        Service storage service = services[_serviceId];
         require(
             usdeToken.transferFrom(
                 msg.sender,
                 service.serviceProvider,
-                sub.amount
+                sub.price
             ),
             "Payment failed"
         );
@@ -121,21 +139,14 @@ contract SubscriptionManager is Ownable {
             block.timestamp +
             (sub.duration == Duration.Monthly ? 30 days : 365 days);
 
-        emit PaymentExecuted(msg.sender, serviceId, sub.amount);
-    }
-
-    function isSubscriptionActive(
-        address user,
-        uint64 serviceId
-    ) external view returns (bool) {
-        return subscriptions[user][serviceId].active;
+        emit PaymentExecuted(msg.sender, _serviceId, sub.price);
     }
 
     function calculateSubscriptionAmount(
-        uint64 serviceId,
+        uint8 _serviceId,
         Duration duration
     ) public view returns (uint128) {
-        Service memory service = services[serviceId];
+        Service memory service = services[_serviceId];
         require(service.active, "Service is not active");
 
         if (duration == Duration.Monthly) {
@@ -145,5 +156,9 @@ contract SubscriptionManager is Ownable {
         } else {
             revert("Invalid duration type");
         }
+    }
+
+    function addServiceProvider(address user) public onlyOwner {
+        _grantRole(SERVICE_PROVIDER, user);
     }
 }
