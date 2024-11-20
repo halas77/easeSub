@@ -1,18 +1,15 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { supabase } from "../supabaseClient";
 import { toast } from "react-toastify";
+import { ServiceFormValues } from "../utils/types";
 
-type ServiceFormValues = {
-  name: string;
-  description: string;
-  price: string;
-  features: string;
-};
+
 
 const CreateService = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<ServiceFormValues>();
 
@@ -30,12 +27,12 @@ const CreateService = () => {
     const { error } = await supabase
       .from("services")
       .insert(formatedServiceData);
-      
 
     if (error) {
       console.error("Error inserting data:", error);
     }
     toast.success("Service created successfully.");
+    reset();
   };
 
   return (

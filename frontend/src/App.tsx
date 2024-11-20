@@ -5,10 +5,13 @@ import Subscriptions from "./pages/Subscriptions";
 import Setting from "./pages/Setting";
 import SubscriptionDetail from "./pages/SubscriptionDetail";
 import Admin from "./pages/Admin";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/transactions" element={<Trasactions />} />
