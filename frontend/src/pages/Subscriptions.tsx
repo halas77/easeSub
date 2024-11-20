@@ -4,7 +4,7 @@ import SubscriptionCard from "../components/SubscriptionCard";
 const Subscriptions = () => {
   return (
     <Layout>
-      <div className="px-10 space-y-3 w-full">
+      <div className="px-10 pt-10 space-y-3 w-full">
         <p className="font-semibold text-2xl text-gray-700 ">
           Subscribed services
         </p>

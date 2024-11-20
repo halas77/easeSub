@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom";
+
 const SubscriptionCard = () => {
   return (
-    <div className="bg-white border border-solid border-gray-200 rounded-2xl p-4 transition-all duration-500">
+    <Link
+      to={"/subscriptions/id"}
+      className="bg-white border border-solid border-gray-200 rounded-2xl p-4 transition-all duration-500"
+    >
       <div className="mb-1 font-semibold text-indigo-700 text-xl text-end">
         19 <span className="text-sm font-normal text-gray-700">USDe</span>
       </div>
@@ -10,7 +15,7 @@ const SubscriptionCard = () => {
       <p className="text-xs font-normal text-gray-500 transition-all duration-500 leading-5 mb-4">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit voluptas.
       </p>
-    </div>
+    </Link>
   );
 };
 

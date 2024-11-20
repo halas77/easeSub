@@ -19,7 +19,7 @@ const Dashboard = () => {
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Architecto, illum.
               </p>
-              <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4">
+              <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 border border-gray-100">
                 {[0, 1, 2, 3].map((item) => (
                   <TransactionCard
                     amount="20"
