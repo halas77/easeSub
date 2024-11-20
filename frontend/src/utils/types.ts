@@ -4,7 +4,17 @@ export type ServiceFormValues = {
   description: string;
   price: string;
   features: string[];
-  serviceId: number
+  serviceId: number;
+};
+
+export type SubscribedService = {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  features: string[];
+  serviceId: number;
+  services: ServiceFormValues;
 };
 
 export type CreateServiceFormValues = {
@@ -13,7 +23,7 @@ export type CreateServiceFormValues = {
   description: string;
   price: string;
   features: string;
-  serviceId: number
+  serviceId: number;
 };
 
 export type SubscriptionDetailCardProps = {

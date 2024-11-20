@@ -12,7 +12,7 @@ const PopularService = () => {
     setLoading(true);
     const { data } = await supabase.from("services").select("*");
 
-    console.log("data", data);
+    console.log("all data", data);
 
     setServices(data || []);
     setLoading(false);
@@ -23,7 +23,7 @@ const PopularService = () => {
   }, []);
 
   return (
-    <div className="px-10 py-10 space-y-3 w-full">
+    <div className="md:px-10 py-10 space-y-3 w-full">
       <p className="font-semibold text-xl text-gray-700 ">Popular services</p>
       <p className="text-xs text-gray-500 pb-2">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,

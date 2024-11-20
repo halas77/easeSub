@@ -1,8 +1,29 @@
+import { useEffect, useState } from "react";
 import SubscriptionCard from "./SubscriptionCard";
+import { supabase } from "../supabaseClient";
+import {  SubscribedService } from "../utils/types";
 
 const MySubscriptions = () => {
+  const [loading, setLoading] = useState(false);
+  const [services, setServices] = useState<SubscribedService[] | null>([]);
+
+  // Fetch subscriber services
+  const fetchServices = async () => {
+    setLoading(true);
+    const { data } = await supabase
+      .from("subscriptions")
+      .select(`*, services(*)`)
+      .eq("subscriber", "abcd");
+
+    setServices(data || []);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchServices();
+  }, []);
   return (
-    <div className="px-10 pt-10 space-y-3 w-full">
+    <div className="md:px-10 pt-10 space-y-3 w-full">
       <p className="font-semibold text-2xl text-gray-700 ">
         Subscribed services
       </p>
@@ -10,11 +31,16 @@ const MySubscriptions = () => {
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,
         illum.
       </p>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {[0, 1, 2, 3].map((item) => (
-          <SubscriptionCard key={item} />
-        ))}
-      </div>
+
+      {loading ? (
+        "Loading..."
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {services?.map((item, idx) => (
+            <SubscriptionCard item={item.services} key={idx} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
