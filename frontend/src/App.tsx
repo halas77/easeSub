@@ -4,6 +4,7 @@ import Trasactions from "./pages/Trasactions";
 import Subscriptions from "./pages/Subscriptions";
 import Setting from "./pages/Setting";
 import SubscriptionDetail from "./pages/SubscriptionDetail";
+import Admin from "./pages/Admin";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/subscriptions" element={<Subscriptions />} />
         <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />
         <Route path="/settings" element={<Setting />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
