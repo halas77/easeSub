@@ -3,5 +3,5 @@ export type ServiceFormValues = {
   name: string;
   description: string;
   price: string;
-  features: string;
+  features: string[];
 };
