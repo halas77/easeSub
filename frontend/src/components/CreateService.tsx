@@ -16,7 +16,7 @@ const CreateService = () => {
   > = async (ServiceData) => {
     const formatedServiceData = {
       ...ServiceData,
-      serviceId: 1,
+      serviceId: 4,
       features: ServiceData.features
         .split(",")
         .map((feature) => feature.trim()),
@@ -28,6 +28,8 @@ const CreateService = () => {
 
     if (error) {
       console.error("Error inserting data:", error);
+      toast.error("Failed to create service.");
+      return;
     }
     toast.success("Service created successfully.");
     reset();
