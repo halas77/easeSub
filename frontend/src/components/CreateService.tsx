@@ -1,9 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { supabase } from "../supabaseClient";
 import { toast } from "react-toastify";
-import { ServiceFormValues } from "../utils/types";
-
-
+import { CreateServiceFormValues } from "../utils/types";
 
 const CreateService = () => {
   const {
@@ -11,11 +9,11 @@ const CreateService = () => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<ServiceFormValues>();
+  } = useForm<CreateServiceFormValues>();
 
-  const handleCreateSubscription: SubmitHandler<ServiceFormValues> = async (
-    ServiceData
-  ) => {
+  const handleCreateSubscription: SubmitHandler<
+    CreateServiceFormValues
+  > = async (ServiceData) => {
     const formatedServiceData = {
       ...ServiceData,
       serviceId: 1,
