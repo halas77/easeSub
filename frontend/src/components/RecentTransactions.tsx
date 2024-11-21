@@ -3,6 +3,7 @@ import TransactionCard from "../components/TransactionCard";
 import { supabase } from "../supabaseClient";
 import { formatDate } from "../utils/lib";
 import { TrasactionsTypes } from "../utils/types";
+import NotFound from "./NotFound";
 const RecentTransactions = () => {
   const [loading, setLoading] = useState(false);
   const [transactions, setTransactions] = useState<TrasactionsTypes[]>([]);
@@ -32,6 +33,8 @@ const RecentTransactions = () => {
       </p>
       {loading ? (
         "Loading ..."
+      ) : transactions.length === 0 ? (
+        <NotFound title="transactions"/>
       ) : (
         <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 max-w-4xl">
           {transactions.map((item, idx) => (

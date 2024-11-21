@@ -3,6 +3,7 @@ import UpcomingCard from "./UpcomingCard";
 import { SubscribedService } from "../utils/types";
 import { supabase } from "../supabaseClient";
 import { formatDate } from "../utils/lib";
+import NotFound from "./NotFound";
 
 const UpcomingPayment = () => {
   const [loading, setLoading] = useState(false);
@@ -38,16 +39,20 @@ const UpcomingPayment = () => {
       {loading ? (
         "Loading..."
       ) : (
-        <div className="w-full custom-gradient rounded-3xl p-4">
-          {services && (
-            <UpcomingCard
-              description={services?.services.description}
-              dueDate={formatDate(services?.nextPaymentDate)}
-              name={services?.services.name}
-              price={services?.price}
-            />
+        <>
+          {services ? (
+            <div className="w-full custom-gradient rounded-3xl p-4">
+              <UpcomingCard
+                description={services?.services.description}
+                dueDate={formatDate(services?.nextPaymentDate)}
+                name={services?.services.name}
+                price={services?.price}
+              />
+            </div>
+          ) : (
+            <NotFound title="subscriptions" />
           )}
-        </div>
+        </>
       )}
     </div>
   );

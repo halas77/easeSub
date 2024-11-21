@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SubscriptionCard from "./SubscriptionCard";
 import { supabase } from "../supabaseClient";
 import { SubscribedService } from "../utils/types";
+import NotFound from "./NotFound";
 
 const MySubscriptions = () => {
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,8 @@ const MySubscriptions = () => {
 
       {loading ? (
         "Loading..."
+      ) : services?.length === 0 ? (
+        <NotFound title="Subscribed Services" />
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {services?.map((item, idx) => (

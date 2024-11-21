@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import SubscriptionCard from "./SubscriptionCard";
 import { supabase } from "../supabaseClient";
 import { ServiceFormValues } from "../utils/types";
+import NotFound from "./NotFound";
 
 const PopularService = () => {
   const [loading, setLoading] = useState(false);
   const [services, setServices] = useState<ServiceFormValues[]>([]);
 
-  // Fetch popular services
   const fetchServices = async () => {
     setLoading(true);
     const { data } = await supabase.from("services").select("*");
@@ -27,17 +27,17 @@ const PopularService = () => {
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,
         illum.
       </p>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {loading ? (
-          "Loading....."
-        ) : (
-          <>
-            {services.map((item, index) => (
-              <SubscriptionCard isSubscribed={false} item={item} key={index} />
-            ))}
-          </>
-        )}
-      </div>
+      {loading ? (
+        "Loading..."
+      ) : services?.length === 0 ? (
+        <NotFound title="Services" />
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {services?.map((item, idx) => (
+            <SubscriptionCard isSubscribed={false} item={item} key={idx} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

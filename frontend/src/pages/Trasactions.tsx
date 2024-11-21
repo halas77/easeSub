@@ -5,6 +5,7 @@ import { supabase } from "../supabaseClient";
 import { formatDate } from "../utils/lib";
 import { TrasactionsTypes } from "../utils/types";
 import Loader from "../components/Loader";
+import NotFound from "../components/NotFound";
 
 const Trasactions = () => {
   const [loading, setLoading] = useState(false);
@@ -37,6 +38,8 @@ const Trasactions = () => {
         </p>
         {loading ? (
           <Loader />
+        ) : transactions?.length === 1 ? (
+          <NotFound title="Transactions" />
         ) : (
           <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 max-w-4xl">
             {transactions.map((item, idx) => (
