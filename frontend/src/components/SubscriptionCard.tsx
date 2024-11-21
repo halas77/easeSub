@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 import { ServiceFormValues } from "../utils/types";
 
-const SubscriptionCard = ({ item }: { item: ServiceFormValues }) => {
+const SubscriptionCard = ({
+  item,
+  isSubscribed,
+}: {
+  item: ServiceFormValues;
+  isSubscribed: boolean;
+}) => {
   return (
     <Link
-      to={`/subscriptions/${item?.id}`}
+      to={
+        isSubscribed
+          ? `/subscriptions/my/${item?.id}`
+          : `/subscriptions/${item?.id}`
+      }
       className="bg-white border border-solid border-gray-200 rounded-2xl p-4 transition-all duration-500"
     >
       <div className="mb-1 font-semibold text-indigo-700 text-xl text-end">

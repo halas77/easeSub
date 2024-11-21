@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { RiExchangeLine } from "react-icons/ri";
-import { dashboardContent } from "../utils/constants";
+import { dashboardContent, socialLinks } from "../utils/constants";
 import { FiChevronRight } from "react-icons/fi";
 
 interface SidebarProps {
@@ -31,23 +31,22 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
           to="/"
           className="h-16 flex items-center px-3 gap-1 shadow shadow-white/20 border-b"
         >
-          <RiExchangeLine size={32} className="font-bold text-indigo-700" />
+          <RiExchangeLine size={32} className="font-bold text-indigo-600" />
           {isExpanded && (
-            <span className="font-semibold text-xl transition-opacity duration-300 whitespace-nowrap text-indigo-700">
+            <span className="font-semibold text-xl transition-opacity duration-300 whitespace-nowrap text-indigo-600">
               easeSub
             </span>
           )}
         </Link>
 
         <ul className="flex flex-col gap-2 justify-center items-start mt-4">
-          {dashboardContent.map((item) => (
-            <Link to={item.href} className="flex items-center gap-3">
+          {dashboardContent.map((item, idx) => (
+            <Link key={idx} to={item.href} className="flex items-center gap-3">
               <li
-                key={item.href}
                 className={`p-4 cursor-pointer text-sm flex items-center gap-3 whitespace-nowrap transition-colors ease-in-out duration-300 ${
                   location.pathname === item.href
-                    ? "text-black font-medium"
-                    : "text-gray-500 hover:text-gray-950"
+                    ? "text-indigo-600 font-semibold"
+                    : "text-gray-500 hover:text-indigo-600"
                 }`}
               >
                 <item.icon size={22} />
@@ -62,6 +61,29 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
             </Link>
           ))}
         </ul>
+        {isExpanded && (
+          <div className="absolute bottom-6 left-0 w-full px-4 text-start text-gray-600 text-xs border-t border-gray-200 pt-4 space-y-1">
+            <p className="whitespace-nowrap">
+              &copy; {new Date().getFullYear()} All rights reserved.
+            </p>
+            <p className="pl-3">Powered by easeSub.</p>
+            <div className="flex justify-start pt-1 gap-6 pl-3">
+              {socialLinks.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <item.icons
+                    className="text-gray-600 hover:text-gray-400 transition-colors duration-200"
+                    size={18}
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="hidden md:block">

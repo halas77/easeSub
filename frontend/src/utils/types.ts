@@ -13,10 +13,18 @@ export interface TrasactionsTypes {
   created_at: string;
 }
 
+export interface UpcomingCardProp {
+  name: string;
+  price: string;
+  description: string;
+  dueDate: string;
+}
+
 export type SubscribedService = {
   id: string;
   name: string;
   description: string;
+  nextPaymentDate: string;
   price: string;
   features: string[];
   serviceId: number;

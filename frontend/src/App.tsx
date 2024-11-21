@@ -7,6 +7,7 @@ import SubscriptionDetail from "./pages/SubscriptionDetail";
 import Admin from "./pages/Admin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MySubscriptionDetail from "./pages/MySubscriptionDetail";
 
 const App = () => {
   return (
@@ -17,6 +18,10 @@ const App = () => {
         <Route path="/transactions" element={<Trasactions />} />
         <Route path="/subscriptions" element={<Subscriptions />} />
         <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />
+        <Route
+          path="/subscriptions/my/:id"
+          element={<MySubscriptionDetail />}
+        />
         <Route path="/settings" element={<Setting />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>

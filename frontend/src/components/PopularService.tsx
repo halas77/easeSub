@@ -12,8 +12,6 @@ const PopularService = () => {
     setLoading(true);
     const { data } = await supabase.from("services").select("*");
 
-    console.log("all data", data);
-
     setServices(data || []);
     setLoading(false);
   };
@@ -35,7 +33,7 @@ const PopularService = () => {
         ) : (
           <>
             {services.map((item, index) => (
-              <SubscriptionCard item={item} key={index} />
+              <SubscriptionCard isSubscribed={false} item={item} key={index} />
             ))}
           </>
         )}

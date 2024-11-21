@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SubscriptionCard from "./SubscriptionCard";
 import { supabase } from "../supabaseClient";
-import {  SubscribedService } from "../utils/types";
+import { SubscribedService } from "../utils/types";
 
 const MySubscriptions = () => {
   const [loading, setLoading] = useState(false);
@@ -37,7 +37,11 @@ const MySubscriptions = () => {
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {services?.map((item, idx) => (
-            <SubscriptionCard item={item.services} key={idx} />
+            <SubscriptionCard
+              isSubscribed={true}
+              item={item.services}
+              key={idx}
+            />
           ))}
         </div>
       )}
