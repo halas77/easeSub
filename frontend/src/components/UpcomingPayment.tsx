@@ -4,6 +4,7 @@ import { SubscribedService } from "../utils/types";
 import { supabase } from "../supabaseClient";
 import { formatDate } from "../utils/lib";
 import NotFound from "./NotFound";
+import UpcomingCardSkeleton from "./skeletons.tsx/UpcomingCardSkeleton";
 
 const UpcomingPayment = () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const UpcomingPayment = () => {
 
     console.log("myservices", data);
 
-    setServices(data || []);
+    setServices(data);
     setLoading(false);
   };
 
@@ -37,7 +38,7 @@ const UpcomingPayment = () => {
         illum.
       </p>
       {loading ? (
-        "Loading..."
+        <UpcomingCardSkeleton />
       ) : (
         <>
           {services ? (

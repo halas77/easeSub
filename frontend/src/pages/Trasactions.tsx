@@ -38,8 +38,8 @@ const Trasactions = () => {
         </p>
         {loading ? (
           <Loader />
-        ) : transactions?.length === 1 ? (
-          <NotFound title="Transactions" />
+        ) : transactions?.length === 0 ? (
+          <NotFound isMySub={true} title="Transactions" />
         ) : (
           <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 max-w-4xl">
             {transactions.map((item, idx) => (

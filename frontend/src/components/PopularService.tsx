@@ -3,6 +3,7 @@ import SubscriptionCard from "./SubscriptionCard";
 import { supabase } from "../supabaseClient";
 import { ServiceFormValues } from "../utils/types";
 import NotFound from "./NotFound";
+import ServiceCardSkeleton from "./skeletons.tsx/ServiceCardSkeleton";
 
 const PopularService = () => {
   const [loading, setLoading] = useState(false);
@@ -28,7 +29,11 @@ const PopularService = () => {
         illum.
       </p>
       {loading ? (
-        "Loading..."
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[0, 1, 2, 4].map((i) => (
+            <ServiceCardSkeleton key={i} />
+          ))}
+        </div>
       ) : services?.length === 0 ? (
         <NotFound title="Services" />
       ) : (

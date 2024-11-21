@@ -4,6 +4,7 @@ import { supabase } from "../supabaseClient";
 import { formatDate } from "../utils/lib";
 import { TrasactionsTypes } from "../utils/types";
 import NotFound from "./NotFound";
+import TransactionCardSkeleton from "./skeletons.tsx/TransactionCardSkeleton";
 const RecentTransactions = () => {
   const [loading, setLoading] = useState(false);
   const [transactions, setTransactions] = useState<TrasactionsTypes[]>([]);
@@ -32,20 +33,27 @@ const RecentTransactions = () => {
         illum.
       </p>
       {loading ? (
-        "Loading ..."
+        <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 max-w-4xl">
+          {[0, 1, 2].map((i) => (
+            <TransactionCardSkeleton key={i} />
+          ))}
+        </div>
       ) : transactions.length === 0 ? (
-        <NotFound title="transactions"/>
+        <NotFound isMySub={true} title="transactions" />
       ) : (
         <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 max-w-4xl">
-          {transactions.map((item, idx) => (
-            <TransactionCard
-              amount={item.price}
-              company={item.name}
-              date={formatDate(item.created_at)}
-              type="deposit"
-              key={idx}
-            />
-          ))}
+          {transactions
+            .slice(0, 3)
+            .reverse()
+            .map((item, idx) => (
+              <TransactionCard
+                amount={item.price}
+                company={item.name}
+                date={formatDate(item.created_at)}
+                type="deposit"
+                key={idx}
+              />
+            ))}
         </div>
       )}
     </div>

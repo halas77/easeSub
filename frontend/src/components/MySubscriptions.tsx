@@ -3,6 +3,7 @@ import SubscriptionCard from "./SubscriptionCard";
 import { supabase } from "../supabaseClient";
 import { SubscribedService } from "../utils/types";
 import NotFound from "./NotFound";
+import ServiceCardSkeleton from "./skeletons.tsx/ServiceCardSkeleton";
 
 const MySubscriptions = () => {
   const [loading, setLoading] = useState(false);
@@ -34,9 +35,13 @@ const MySubscriptions = () => {
       </p>
 
       {loading ? (
-        "Loading..."
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[0, 1, 2, 4].map((i) => (
+            <ServiceCardSkeleton key={i} />
+          ))}
+        </div>
       ) : services?.length === 0 ? (
-        <NotFound title="Subscribed Services" />
+        <NotFound isMySub={true} title="Subscribed Services" />
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {services?.map((item, idx) => (

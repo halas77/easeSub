@@ -8,6 +8,7 @@ import Admin from "./pages/Admin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MySubscriptionDetail from "./pages/MySubscriptionDetail";
+import Services from "./pages/Services";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/transactions" element={<Trasactions />} />
+        <Route path="/services" element={<Services />} />
         <Route path="/subscriptions" element={<Subscriptions />} />
         <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />
         <Route

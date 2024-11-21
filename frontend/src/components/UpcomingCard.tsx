@@ -12,7 +12,7 @@ const UpcomingCard = ({
         <div className="flex justify-between w-full items-end gap-5">
           <p className="text-xl uppercase font-semibold">{name}</p>
           <p className="text-end font-semibold text-3xl leading-none">
-            <span className="text-2xl leading-none font-semibold">
+            <span className="text-xl leading-none font-semibold">
               {dueDate}
             </span>
           </p>

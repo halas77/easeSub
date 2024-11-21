@@ -1,6 +1,7 @@
 import { FiGrid, FiSettings } from "react-icons/fi";
 import { GrTransaction } from "react-icons/gr";
 import { LuFolderClock } from "react-icons/lu";
+import { HiOutlineCog } from "react-icons/hi2";
 
 import { FiMail } from "react-icons/fi";
 import { PiTelegramLogo } from "react-icons/pi";
@@ -9,7 +10,8 @@ import { RiGithubLine } from "react-icons/ri";
 
 export const dashboardContent = [
   { label: "Dashboard", href: "/", icon: FiGrid },
-  { label: "Subscriptions", href: "/subscriptions", icon: LuFolderClock },
+  { label: "My subscriptions", href: "/subscriptions", icon: LuFolderClock },
+  { label: "Services", href: "/services", icon: HiOutlineCog },
   { label: "Transactions", href: "/transactions", icon: GrTransaction },
   { label: "Settings", href: "/settings", icon: FiSettings },
 ];
