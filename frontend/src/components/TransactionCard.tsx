@@ -1,4 +1,4 @@
-import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import { GrTransaction } from "react-icons/gr";
 
 interface TransactionCardProps {
   type: string;
@@ -23,7 +23,7 @@ const TransactionCard = ({
               : "bg-red-100 text-red-600"
           }`}
         >
-          {type === "deposit" ? <FaArrowDown /> : <FaArrowUp />}
+          <GrTransaction size={22}/>
         </div>
 
         <div className="flex-1">

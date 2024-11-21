@@ -1,7 +1,29 @@
+import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import TransactionCard from "../components/TransactionCard";
+import { supabase } from "../supabaseClient";
+import { formatDate } from "../utils/lib";
+import { TrasactionsTypes } from "../utils/types";
 
 const Trasactions = () => {
+  const [loading, setLoading] = useState(false);
+  const [transactions, setTransactions] = useState<TrasactionsTypes[]>([]);
+
+  const fetchTransactions = async () => {
+    setLoading(true);
+    const { data } = await supabase
+      .from("transactions")
+      .select("*")
+      .eq("subscriber", "abcdef");
+
+    setTransactions(data || []);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
   return (
     <Layout>
       <div className=" px-10 space-y-3 w-full pt-10">
@@ -12,17 +34,21 @@ const Trasactions = () => {
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,
           illum.
         </p>
-        <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 max-w-4xl">
-          {[0, 1, 2, 3].map((item) => (
-            <TransactionCard
-              amount="20"
-              company="Lorem ipsum"
-              date="Sep 02, 204"
-              type="deposit"
-              key={item}
-            />
-          ))}
-        </div>
+        {loading ? (
+          "Loading ..."
+        ) : (
+          <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 max-w-4xl">
+            {transactions.map((item, idx) => (
+              <TransactionCard
+                amount={item.price}
+                company={item.name}
+                date={formatDate(item.created_at)}
+                type="deposit"
+                key={idx}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </Layout>
   );

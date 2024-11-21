@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import PopularService from "../components/PopularService";
-import TransactionCard from "../components/TransactionCard";
-import UpcomingCard from "../components/UpcomingCard";
+import RecentTransactions from "../components/RecentTransactions";
+import UpcomingPayment from "../components/UpcomingPayment";
 import Welcome from "../components/Welcome";
 
 const Dashboard = () => {
@@ -11,38 +11,8 @@ const Dashboard = () => {
         <div className="w-full">
           <Welcome />
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="pt-10 space-y-3 w-full">
-              <p className="font-semibold text-xl text-gray-700 ">
-                Recent transactions
-              </p>
-              <p className="text-xs text-gray-500 pb-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Architecto, illum.
-              </p>
-              <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 border border-gray-100">
-                {[0, 1, 2, 3].map((item) => (
-                  <TransactionCard
-                    amount="20"
-                    company="Lorem ipsum"
-                    date="Sep 02, 204"
-                    type="deposit"
-                    key={item}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="pt-10 space-y-3 w-full">
-              <p className="font-semibold text-xl text-gray-700">
-                Upcoming fee
-              </p>
-              <p className="text-xs text-gray-500 pb-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Architecto, illum.
-              </p>
-              <div className="w-full custom-gradient rounded-3xl p-4">
-                <UpcomingCard />
-              </div>
-            </div>
+            <RecentTransactions />
+            <UpcomingPayment />
           </div>
         </div>
       </div>

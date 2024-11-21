@@ -7,6 +7,12 @@ export type ServiceFormValues = {
   serviceId: number;
 };
 
+export interface TrasactionsTypes {
+  name: string;
+  price: string;
+  created_at: string;
+}
+
 export type SubscribedService = {
   id: string;
   name: string;
