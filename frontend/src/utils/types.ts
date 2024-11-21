@@ -21,7 +21,7 @@ export interface UpcomingCardProp {
 }
 
 export type SubscribedService = {
-  id: string;
+  id: string | undefined;
   name: string;
   description: string;
   nextPaymentDate: string;
@@ -29,6 +29,8 @@ export type SubscribedService = {
   features: string[];
   serviceId: number;
   services: ServiceFormValues;
+  duration: string;
+  active: boolean;
 };
 
 export type CreateServiceFormValues = {

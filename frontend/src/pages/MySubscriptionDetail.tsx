@@ -1,31 +1,46 @@
+import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import SubscriptionDetail from "../components/SubscriptionDetail";
-
-const subscriptionData = {
-  price: 49.99,
-  dueDate: "2024-12-31",
-  status: true,
-  duration: "1 year",
-  features: [
-    "Unlimited access",
-    "Priority customer support",
-    "Customizable dashboards",
-    "Exclusive content updates",
-  ],
-};
-
+import { supabase } from "../supabaseClient";
+import { SubscribedService } from "../utils/types";
+import { useParams } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const MySubscriptionDetail = () => {
+  const [loading, setLoading] = useState(false);
+  const [subDetail, setSubDetail] = useState<SubscribedService>();
+
+  const { id } = useParams();
+
+  const fetchServices = async () => {
+    setLoading(true);
+    const { data } = await supabase
+      .from("subscriptions")
+      .select(`*, services(*)`)
+      .eq("id", id)
+      .single();
+
+    console.log("data detail", data);
+
+    setSubDetail(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
   return (
     <Layout>
-      <div className=" px-10 space-y-3 w-full pt-10">
-        <p className="font-semibold text-3xl pl-1 text-gray-700 ">Premium Plan</p>
-        <p className="text-xs text-gray-500 pb-2 pl-2">
-        Enjoy unlimited access to premium features.
+      <div className="md:px-10 space-y-3 w-full pt-10 max-w-5xl">
+        <p className="font-semibold text-3xl pl-1 text-gray-700 ">
+          {subDetail?.services.name}
         </p>
-        
-        <SubscriptionDetail {...subscriptionData} />
-        
+        <p className="text-xs text-gray-500 pb-2 pl-2">
+          {subDetail?.services.description}
+          {}
+        </p>
+        {loading ? <Loader /> : <SubscriptionDetail sub={subDetail} />}
       </div>
     </Layout>
   );

@@ -1,93 +1,57 @@
-import { AiOutlineClockCircle } from "react-icons/ai";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { FiCalendar } from "react-icons/fi";
 import { FaRegCircleCheck } from "react-icons/fa6";
+import { SubscribedService } from "../utils/types";
+import { formatDate } from "../utils/lib";
 
-const SubscriptionDetail = ({
-  price,
-  dueDate,
-  status,
-  duration,
-  features,
-}: {
-  price: number;
-  dueDate: string;
-  status: boolean;
-  duration: string;
-  features: string[];
-}) => {
+interface SubscriptionDetailTypes {
+  sub: SubscribedService | undefined;
+}
+
+const SubscriptionDetail = ({ sub }: SubscriptionDetailTypes) => {
   return (
-    <div className="max-w-5xl p-8 bg-white rounded-3xl space-y-8 text-sm">
-      {/* Cancel Plan Button */}
-      <div className="text-end">
-        <button className="text-sm font-semibold px-5 py-2 text-red-700 bg-red-100 rounded-lg hover:bg-red-200 transition duration-200">
+    <div>
+      <div className="p-4 relative bg-white border border-gray-100 rounded-3xl md:p-10 ">
+        <div className="mt-5 grid sm:grid-cols-2 gap-y-2 py-4 first:pt-0 last:pb-0 sm:gap-x-6 sm:gap-y-0">
+          <div className="border-r pr-4">
+            <h3 className="text-sm border px-4 py-1 inline-flex text-indigo-500 mb-4 rounded-full border-indigo-500">
+              {sub?.duration}
+            </h3>
+
+            <div className="mt-5">
+              <span className="text-5xl font-bold text-indigo-600">
+                $ {sub?.price}
+              </span>
+              <span className="ms-3 text-gray-500 text-base">USDe</span>
+            </div>
+          </div>
+          <div className="">
+            <ul className="space-y-3 text-sm">
+              {sub?.services.features.map((item, idx) => (
+                <li
+                  key={idx}
+                  className="flex gap-x-3 justify-start items-center"
+                >
+                  <FaRegCircleCheck className="text-indigo-700 shrink-0" />
+                  <span className="text-gray-800 -200 text-xs">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="flex items-center gap-3 py-4">
+          <span className="text-red-600 font-medium">
+            Due Date:{" "}
+            <span className="ext-red-600  ">
+              {formatDate(sub?.nextPaymentDate || "")}
+            </span>
+          </span>
+        </div>
+
+        <button
+          type="submit"
+          className="py-3 mt-5 px-4 items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 bg-red-100 text-red-700 shadow-sm hover:bg-red-200 disabled:opacity-50  ease-in-out duration-200 disabled:pointer-events-none text-center w-full"
+        >
           Cancel Plan
         </button>
-      </div>
-
-      {/* Details Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Plan Information */}
-        <div className="space-y-5">
-          <div className="flex items-center gap-3">
-            <RiMoneyDollarCircleLine size={24} className="text-indigo-500" />
-            <span className="text-gray-600 ">
-              Price:{" "}
-              <span className="text-gray-900 font-semibold">${price}</span>
-            </span>
-          </div>
-          <div className="flex items-center gap-3">
-            <FiCalendar size={24} className="text-indigo-500" />
-            <span className="text-gray-600 ">
-              Due Date:{" "}
-              <span className="text-gray-900 font-semibold">{dueDate}</span>
-            </span>
-          </div>
-          <div className="flex items-center gap-3">
-            <AiOutlineClockCircle size={24} className="text-indigo-500" />
-            <span className="text-gray-600 ">
-              Duration:{" "}
-              <span className="text-gray-900 font-semibold">{duration}</span>
-            </span>
-          </div>
-          <div className="flex items-center gap-3">
-            <FaRegCircleCheck
-              size={24}
-              className={status ? "text-indigo-500" : "text-red-500"}
-            />
-            <span className="text-gray-600 ">
-              Status:{" "}
-              <span
-                className={
-                  status
-                    ? "text-green-600 font-semibold"
-                    : "text-red-600 font-semibold"
-                }
-              >
-                {status}
-              </span>
-            </span>
-          </div>
-        </div>
-
-        {/* Features Section */}
-        <div>
-          <h3 className="text-lg font-bold text-gray-800 mb-4">Features</h3>
-          <ul className="space-y-3">
-            {features.map((feature, index) => (
-              <li
-                key={index}
-                className="text-gray-600 flex items-start hover:text-gray-900 transition duration-200"
-              >
-                <FaRegCircleCheck
-                  size={18}
-                  className="text-indigo-500 mr-3 mt-1"
-                />
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </div>
   );

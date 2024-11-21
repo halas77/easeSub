@@ -46,6 +46,7 @@ const MySubscriptions = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {services?.map((item, idx) => (
             <SubscriptionCard
+              id={item.id}
               isSubscribed={true}
               item={item.services}
               key={idx}

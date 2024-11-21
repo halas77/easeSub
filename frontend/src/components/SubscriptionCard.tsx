@@ -4,15 +4,17 @@ import { ServiceFormValues } from "../utils/types";
 const SubscriptionCard = ({
   item,
   isSubscribed,
+  id,
 }: {
   item: ServiceFormValues;
   isSubscribed: boolean;
+  id?: string;
 }) => {
   return (
     <Link
       to={
         isSubscribed
-          ? `/subscriptions/my/${item?.id}`
+          ? `/subscriptions/my/${id}`
           : `/subscriptions/${item?.id}`
       }
       className="bg-white border border-solid border-gray-200 rounded-2xl p-4 transition-all duration-500"
