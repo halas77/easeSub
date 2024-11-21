@@ -17,29 +17,31 @@ const SubscriptionDetailCard = ({
     setLoading(true);
 
     try {
-      // Define subscription data
-      let data;
+      let data = {
+        serviceId: sub.id,
+        subscriber: "abcdef",
+        active: true,
+        price: "",
+        nextPaymentDate: "",
+        duration: "",
+      };
 
       if (idx === 0) {
         // Monthly subscription
         const dueDate = addDays(new Date(), 30);
         data = {
-          serviceId: sub.id,
-          subscriber: "abcdef", // Replace with dynamic subscriber ID
+          ...data,
           price: sub.price,
           nextPaymentDate: dueDate.toISOString(),
-          active: true,
           duration: "Monthly",
         };
       } else if (idx === 1) {
         // Yearly subscription
         const dueDate = addDays(new Date(), 365);
         data = {
-          serviceId: sub.id,
-          subscriber: "abcd", // Replace with dynamic subscriber ID
+          ...data,
           price: yearlyPrice.toString(),
           nextPaymentDate: dueDate.toISOString(),
-          active: true,
           duration: "Yearly",
         };
       } else {
@@ -48,20 +50,31 @@ const SubscriptionDetailCard = ({
         return;
       }
 
-      // Validate data before insertion
       if (!data) {
         toast.error("No data to insert.");
         setLoading(false);
         return;
       }
 
-      // Insert data into Supabase
       const { error } = await supabase.from("subscriptions").insert(data);
 
       if (error) {
         console.error("Supabase insertion error:", error);
         toast.error("Failed to create subscription.");
       } else {
+        const txData = {
+          name: sub.name,
+          price: data.price,
+          subscriber: data.subscriber,
+        };
+
+        const { error } = await supabase.from("transactions").insert(txData);
+
+        if (error) {
+          console.error("Supabase insertion error:", error);
+          toast.error("Failed to create subscription.");
+          return;
+        }
         toast.success("Subscription created successfully.");
       }
     } catch (error) {
@@ -87,7 +100,7 @@ const SubscriptionDetailCard = ({
             </div>
 
             <div className="mt-5">
-              <span className="text-5xl font-bold text-indigo-700 -200">
+              <span className="text-5xl font-bold text-indigo-600">
                 $ {index === 0 ? `${sub.price}` : yearlyPrice}
               </span>
               <span className="ms-3 text-gray-500 text-base">USDe</span>

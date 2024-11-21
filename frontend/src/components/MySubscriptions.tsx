@@ -13,7 +13,7 @@ const MySubscriptions = () => {
     const { data } = await supabase
       .from("subscriptions")
       .select(`*, services(*)`)
-      .eq("subscriber", "abcd");
+      .eq("subscriber", "abcdef");
 
     setServices(data || []);
     setLoading(false);

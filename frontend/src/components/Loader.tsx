@@ -6,7 +6,7 @@ const Loader = () => {
       <div className="relative flex items-center justify-center">
         <div className="flex flex-col justify-center items-center gap-5">
           <div className="flex gap-2 justify-center items-center my-4">
-            <RiExchangeLine size={80} className="animate-spin" />
+            <RiExchangeLine size={70} className="animate-spin" />
           </div>
         </div>
       </div>
