@@ -1,6 +1,6 @@
-# EaseSub - Web3 Subscription Platform
+# EaseSub - Web3 Subscription Managment Platform
 
-EaseSub is a decentralized service management system powered by blockchain technology. It allows users to subscribe to a range of services with flexibility in payment options, including monthly and yearly plans. The platform is built using Ethereum smart contracts, ensuring secure and transparent transactions, and it integrates with MetaMask for wallet management.
+The subscription economy is booming, projected to reach $20.58 trillion by 2026. EaseSub leverages Web3 and the stability of USDe stablecoin to transform subscription payments—offering a seamless, transparent, and borderless platform. Say goodbye to volatility and high fees, and hello to the future of recurring services.
 
 ## Key Features
 
