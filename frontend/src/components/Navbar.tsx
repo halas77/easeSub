@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
               </div>
 
               <input
-                className="border border-gray-200 focus:border-gray-400 rounded-3xl w-full text-sm text-gray-700 bg-gray-50 pl-10 py-2.5 focus:outline-none transition duration-200 focus:ring-gray-950 "
+                className="border border-gray-200 focus:border-gray-400 rounded-3xl w-full text-sm text-gray-700 bg-gray-50 pl-10 py-3 focus:outline-none transition duration-200 focus:ring-gray-950 "
                 type="text"
                 placeholder="Search Services (e.g, Spotify)"
                 value={searchValue}
