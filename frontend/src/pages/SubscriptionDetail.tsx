@@ -19,7 +19,7 @@ const SubscriptionDetail = () => {
 
   const { id } = useParams();
 
-  const getProducts = async () => {
+  const getServiceDetail = async () => {
     setLoading(true);
     const { data } = await supabase
       .from("services")
@@ -35,7 +35,7 @@ const SubscriptionDetail = () => {
   };
 
   useEffect(() => {
-    getProducts();
+    getServiceDetail();
   }, []);
 
   return (

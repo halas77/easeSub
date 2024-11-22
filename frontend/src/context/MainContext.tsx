@@ -34,9 +34,9 @@ export const MainProvider = ({ children }: { children: ReactNode }) => {
 
   const ethenaNetwork = {
     chainId: "0x31a9b87",
-    chainName: "Ble Testnet",
+    chainName: "BLE Testnet",
     nativeCurrency: {
-      name: "Ether",
+      name: "BLE",
       symbol: "ETH",
       decimals: 18,
     },

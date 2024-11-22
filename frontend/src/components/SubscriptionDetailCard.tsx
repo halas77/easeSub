@@ -4,6 +4,7 @@ import { useState } from "react";
 import { addDays } from "../utils/lib";
 import { toast } from "react-toastify";
 import { supabase } from "../supabaseClient";
+import { useMainContext } from "../context/MainContext";
 
 const SubscriptionDetailCard = ({
   sub,
@@ -12,6 +13,7 @@ const SubscriptionDetailCard = ({
   const [loading, setLoading] = useState(false);
 
   const yearlyPrice = (parseInt(sub.price) * 12 * 70) / 100;
+  const { account } = useMainContext();
 
   const handleCreateSubscription = async (idx: number) => {
     setLoading(true);
@@ -19,7 +21,7 @@ const SubscriptionDetailCard = ({
     try {
       let data = {
         serviceId: sub.id,
-        subscriber: "abcdef",
+        subscriber: account,
         active: true,
         price: "",
         nextPaymentDate: "",

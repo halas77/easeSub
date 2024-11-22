@@ -14,6 +14,7 @@ export interface TrasactionsTypes {
 }
 
 export interface UpcomingCardProp {
+  id: string;
   name: string;
   price: string;
   description: string;

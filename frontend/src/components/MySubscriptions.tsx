@@ -4,10 +4,14 @@ import { supabase } from "../supabaseClient";
 import { SubscribedService } from "../utils/types";
 import NotFound from "./NotFound";
 import ServiceCardSkeleton from "./skeletons.tsx/ServiceCardSkeleton";
+import { useMainContext } from "../context/MainContext";
 
 const MySubscriptions = () => {
   const [loading, setLoading] = useState(false);
   const [services, setServices] = useState<SubscribedService[] | null>([]);
+
+  const { account } = useMainContext();
+
 
   // Fetch subscriber services
   const fetchServices = async () => {
@@ -15,7 +19,7 @@ const MySubscriptions = () => {
     const { data } = await supabase
       .from("subscriptions")
       .select(`*, services(*)`)
-      .eq("subscriber", "abcdef");
+      .eq("subscriber", account);
 
     setServices(data || []);
     setLoading(false);

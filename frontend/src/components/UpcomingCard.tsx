@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { UpcomingCardProp } from "../utils/types";
 
 const UpcomingCard = ({
@@ -5,10 +6,11 @@ const UpcomingCard = ({
   dueDate,
   description,
   price,
+  id,
 }: UpcomingCardProp) => {
   return (
-    <div>
-      <div className=" flex flex-col justify-center items-start space-y-2 cursor-pointer text-white px-6 py-8">
+    <Link to={`/subscriptions/my/${id}`}>
+      <div className=" flex flex-col justify-center items-start space-y-2  text-white px-6 py-8">
         <div className="flex justify-between w-full items-end gap-5">
           <p className="text-xl uppercase font-semibold">{name}</p>
           <p className="text-end font-semibold text-3xl leading-none">
@@ -26,7 +28,7 @@ const UpcomingCard = ({
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -5,10 +5,13 @@ import { supabase } from "../supabaseClient";
 import { formatDate } from "../utils/lib";
 import NotFound from "./NotFound";
 import UpcomingCardSkeleton from "./skeletons.tsx/UpcomingCardSkeleton";
+import { useMainContext } from "../context/MainContext";
 
 const UpcomingPayment = () => {
   const [loading, setLoading] = useState(false);
   const [services, setServices] = useState<SubscribedService | null>();
+
+  const { account } = useMainContext();
 
   // Fetch subscriber services
   const fetchServices = async () => {
@@ -16,12 +19,10 @@ const UpcomingPayment = () => {
     const { data } = await supabase
       .from("subscriptions")
       .select(`*, services(*)`)
-      .eq("subscriber", "abcdef")
-      .order("nextPaymentDate", { ascending: true })
+      .eq("subscriber", account)
+      .order("nextPaymentDate", { ascending: false })
       .limit(1)
       .single();
-
-    console.log("myservices", data);
 
     setServices(data);
     setLoading(false);
@@ -44,6 +45,7 @@ const UpcomingPayment = () => {
           {services ? (
             <div className="w-full custom-gradient rounded-3xl p-4">
               <UpcomingCard
+                id={services.id || ""}
                 description={services?.services.description}
                 dueDate={formatDate(services?.nextPaymentDate)}
                 name={services?.services.name}

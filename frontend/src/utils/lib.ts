@@ -15,3 +15,24 @@ export const formatDate = (inputDate: string): string => {
   return formattedDate;
 };
 
+import { ethers } from 'ethers';
+
+export const getAccountBalance = async (account: string) => {
+  if (!window.ethereum) {
+    alert('MetaMask is not installed.');
+    return;
+  }
+
+  try {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const balance = await provider.getBalance(account);
+    const balanceInEth = ethers.utils.formatEther(balance);
+    console.log('Balance:', balanceInEth);
+    return balanceInEth;
+  } catch (error) {
+    console.error('Error fetching balance:', error);
+    return null;
+  }
+};
+
+
