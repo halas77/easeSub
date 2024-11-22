@@ -29,7 +29,7 @@ const Welcome = () => {
 
       <div className="flex items-center gap-4">
         <p className="text-gray-800 font-bold text-4xl">
-          {isVisible ? balance?.slice(0, 5) || "0" : "****"}
+          {isVisible ? balance?.slice(0, 6) || "0" : "*****"}
           <span className="ml-1 text-lg font-medium text-gray-500">USDe</span>
         </p>
 
