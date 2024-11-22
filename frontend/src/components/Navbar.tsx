@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FiLogOut } from "react-icons/fi";
 import { dashboardContent } from "../utils/constants";
 import { RiExchangeLine } from "react-icons/ri";
-import { FaUserCircle } from "react-icons/fa";
+import { FaSearch, FaUserCircle } from "react-icons/fa";
 
 interface NavbarProps {
   className?: string;
@@ -13,6 +13,19 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ className }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [searchValue, setSearchValue] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      navigate("/search", { state: { name: searchValue } });
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,6 +45,24 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
   return (
     <div className={`w-full ${className}`}>
       <nav className="h-16 flex justify-between lg:justify-end items-center  bg-white  relative z-10 px-5">
+        <div className="hidden lg:flex w-full pr-6">
+          <div className="w-1/2 h-full hidden lg:flex items-center pl-6 pr-24">
+            <div className="relative w-full">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <FaSearch className="text-gray-400" size={16} />
+              </div>
+
+              <input
+                className="border border-gray-200 focus:border-gray-400 rounded-3xl w-full text-sm text-gray-700 bg-gray-50 pl-10 py-2.5 focus:outline-none transition duration-200 focus:ring-gray-950 "
+                type="text"
+                placeholder="Search Services (e.g, Spotify)"
+                value={searchValue}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyPress}
+              />
+            </div>
+          </div>
+        </div>
         <Link
           to={"/"}
           className="flex lg:hidden justify-center items-center gap-2 py-4"

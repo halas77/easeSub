@@ -12,6 +12,7 @@ import Services from "./pages/Services";
 import ConnectWallet from "./pages/ConnectWallet";
 import PrivateRoute from "./components/PrivateRoute";
 import { MainProvider } from "./context/MainContext";
+import SearchService from "./pages/SearchService";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/transactions" element={<Trasactions />} />
+            <Route path="/search" element={<SearchService />} />
             <Route path="/services" element={<Services />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
             <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />

@@ -7,7 +7,7 @@ import Welcome from "../components/Welcome";
 const Dashboard = () => {
   return (
     <Layout>
-      <div className="md:px-10 w-full flex justify-between items-center">
+      <div className="md:px-10 pt-8 w-full flex justify-between items-center">
         <div className="w-full">
           <Welcome />
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12">
