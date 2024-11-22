@@ -9,25 +9,33 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MySubscriptionDetail from "./pages/MySubscriptionDetail";
 import Services from "./pages/Services";
+import ConnectWallet from "./pages/ConnectWallet";
+import PrivateRoute from "./components/PrivateRoute";
+import { MainProvider } from "./context/MainContext";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <ToastContainer />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/transactions" element={<Trasactions />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/subscriptions" element={<Subscriptions />} />
-        <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />
-        <Route
-          path="/subscriptions/my/:id"
-          element={<MySubscriptionDetail />}
-        />
-        <Route path="/settings" element={<Setting />} />
-        <Route path="/admin" element={<Admin />} />
-      </Routes>
-    </BrowserRouter>
+    <MainProvider>
+      <BrowserRouter>
+        <ToastContainer />
+        <Routes>
+          <Route path="/connect-wallet" element={<ConnectWallet />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/transactions" element={<Trasactions />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/subscriptions" element={<Subscriptions />} />
+            <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />
+            <Route
+              path="/subscriptions/my/:id"
+              element={<MySubscriptionDetail />}
+            />
+            <Route path="/settings" element={<Setting />} />
+            <Route path="/admin" element={<Admin />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </MainProvider>
   );
 };
 

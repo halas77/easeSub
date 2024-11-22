@@ -38,7 +38,7 @@ const SubscriptionDetail = ({ sub }: SubscriptionDetailTypes) => {
           </div>
         </div>
         <div className="flex items-center gap-3 py-4">
-          <span className="text-red-600 font-medium">
+          <span className="text-red-600">
             Due Date:{" "}
             <span className="ext-red-600  ">
               {formatDate(sub?.nextPaymentDate || "")}

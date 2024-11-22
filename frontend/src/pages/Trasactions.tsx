@@ -28,7 +28,7 @@ const Trasactions = () => {
 
   return (
     <Layout>
-      <div className=" px-10 space-y-3 w-full pt-10">
+      <div className=" md:px-10 space-y-3 w-full pt-10">
         <p className="font-semibold text-3xl pl-1 text-gray-700 ">
           Transactions
         </p>
