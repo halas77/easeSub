@@ -12,7 +12,6 @@ const MySubscriptions = () => {
 
   const { account } = useMainContext();
 
-
   // Fetch subscriber services
   const fetchServices = async () => {
     setLoading(true);
@@ -34,8 +33,7 @@ const MySubscriptions = () => {
         Subscribed services
       </p>
       <p className="text-xs text-gray-500 pb-2">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,
-        illum.
+        Manage and access your active service subscriptions.
       </p>
 
       {loading ? (

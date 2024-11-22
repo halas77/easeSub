@@ -39,8 +39,7 @@ const SearchService = () => {
       <div className="md:px-10 py-10 space-y-3 w-full">
         <p className="font-semibold text-xl text-gray-700 ">Search results</p>
         <p className="text-xs text-gray-500 pb-2">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,
-          illum.
+          Explore findings based on your search query
         </p>
         {loading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">

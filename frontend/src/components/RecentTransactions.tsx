@@ -29,8 +29,7 @@ const RecentTransactions = () => {
         Recent transactions
       </p>
       <p className="text-xs text-gray-500 pb-2">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,
-        illum.
+        Track and view your latest financial transactions.
       </p>
       {loading ? (
         <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 max-w-4xl">

@@ -35,8 +35,7 @@ const UpcomingPayment = () => {
     <div className="pt-10 space-y-3 w-full">
       <p className="font-semibold text-xl text-gray-700">Upcoming fee</p>
       <p className="text-xs text-gray-500 pb-2">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,
-        illum.
+      Preview for pending payment obligations.
       </p>
       {loading ? (
         <UpcomingCardSkeleton />

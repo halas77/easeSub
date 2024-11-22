@@ -33,8 +33,7 @@ const Trasactions = () => {
           Transactions
         </p>
         <p className="text-xs text-gray-500 pb-2 pl-2">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,
-          illum.
+          Track and view your financial transactions.
         </p>
         {loading ? (
           <Loader />
