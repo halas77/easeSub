@@ -66,7 +66,18 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
             <p className="whitespace-nowrap">
               &copy; {new Date().getFullYear()} All rights reserved.
             </p>
-            <p className="pl-3">Powered by easeSub.</p>
+            <div className="pl-3">
+              Powered by{" "}
+              <a
+                href="https://github.com/halas77"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-600 underline cursor-pointer"
+              >
+                halas77
+              </a>
+              .
+            </div>
             <div className="flex justify-start pt-1 gap-6 pl-3">
               {socialLinks.map((item) => (
                 <a

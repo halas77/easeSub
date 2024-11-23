@@ -27,7 +27,6 @@ const SubscriptionDetail = () => {
       .eq("id", id)
       .single();
 
-    console.log("data", data);
     if (data) {
       setData(data);
     }

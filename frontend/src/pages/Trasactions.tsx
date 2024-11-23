@@ -6,17 +6,20 @@ import { formatDate } from "../utils/lib";
 import { TrasactionsTypes } from "../utils/types";
 import Loader from "../components/Loader";
 import NotFound from "../components/NotFound";
+import { useMainContext } from "../context/MainContext";
 
 const Trasactions = () => {
   const [loading, setLoading] = useState(false);
   const [transactions, setTransactions] = useState<TrasactionsTypes[]>([]);
+
+  const { account } = useMainContext();
 
   const fetchTransactions = async () => {
     setLoading(true);
     const { data } = await supabase
       .from("transactions")
       .select("*")
-      .eq("subscriber", "abcdef");
+      .eq("subscriber", account);
 
     setTransactions(data || []);
     setLoading(false);

@@ -5,16 +5,19 @@ import { formatDate } from "../utils/lib";
 import { TrasactionsTypes } from "../utils/types";
 import NotFound from "./NotFound";
 import TransactionCardSkeleton from "./skeletons.tsx/TransactionCardSkeleton";
+import { useMainContext } from "../context/MainContext";
 const RecentTransactions = () => {
   const [loading, setLoading] = useState(false);
   const [transactions, setTransactions] = useState<TrasactionsTypes[]>([]);
+
+  const { account } = useMainContext();
 
   const fetchTransactions = async () => {
     setLoading(true);
     const { data } = await supabase
       .from("transactions")
       .select("*")
-      .eq("subscriber", "abcdef");
+      .eq("subscriber", account);
 
     setTransactions(data || []);
     setLoading(false);
