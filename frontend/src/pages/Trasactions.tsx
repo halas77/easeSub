@@ -49,7 +49,6 @@ const Trasactions = () => {
                 amount={item.price}
                 company={item.name}
                 date={formatDate(item.created_at)}
-                type="deposit"
                 key={idx}
               />
             ))}
