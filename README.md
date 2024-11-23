@@ -1,4 +1,4 @@
-# EaseSub - Web3 Subscription Managment Platform
+# EaseSub - Subscription Management Platform
 
 The subscription economy is booming, projected to reach $20.58 trillion by 2026. EaseSub leverages Web3 and the stability of Ethena's USDe stablecoin to transform subscription payments—offering a seamless, transparent, and borderless platform. Say goodbye to volatility and high fees, and hello to the future of recurring services.
 
