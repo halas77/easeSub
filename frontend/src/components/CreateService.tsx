@@ -2,6 +2,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { supabase } from "../supabaseClient";
 import { toast } from "react-toastify";
 import { CreateServiceFormValues } from "../utils/types";
+import { useEffect } from "react";
+import { createNewService, getServiceId } from "../contract/manageService";
 
 const CreateService = () => {
   const {
@@ -14,26 +16,34 @@ const CreateService = () => {
   const handleCreateSubscription: SubmitHandler<
     CreateServiceFormValues
   > = async (ServiceData) => {
+    const serviceId = await getServiceId();
+
     const formatedServiceData = {
       ...ServiceData,
-      serviceId: 4,
+      serviceId: serviceId + 1,
       features: ServiceData.features
         .split(",")
         .map((feature) => feature.trim()),
     };
 
-    const { error } = await supabase
-      .from("services")
-      .insert(formatedServiceData);
+    const res = await createNewService(formatedServiceData.price);
 
-    if (error) {
-      console.error("Error inserting data:", error);
-      toast.error("Failed to create service.");
-      return;
+    if (res) {
+      const { error } = await supabase
+        .from("services")
+        .insert(formatedServiceData);
+
+      if (error) {
+        console.error("Error inserting data:", error);
+        toast.error("Failed to create service.");
+        return;
+      }
+      toast.success("Service created successfully.");
+      reset();
     }
-    toast.success("Service created successfully.");
-    reset();
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="w-full h-full   flex items-start justify-start">
@@ -93,7 +103,7 @@ const CreateService = () => {
               <input
                 {...register("price", { required: true })}
                 type="number"
-                step="0.01"
+                step="0.00001"
                 className="py-3 px-4 block w-full border border-gray-300 rounded-lg text-sm focus:border-gray-950 focus:ring-gray-950 placeholder-gray-400 transition duration-300 ease-in-out"
                 placeholder="e.g., 19.99"
               />
