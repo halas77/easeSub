@@ -39,12 +39,13 @@ describe("Subscription manager contract deployed.", () => {
       Yearly: 1,
     };
 
-    await SubscriptionManager.createSubscription(
-      serviceId,
-      Duration.Monthly
-    );
+    console.log("owner", owner);
+
+    await SubscriptionManager.connect(owner).createSubscription(serviceId, Duration.Monthly);
 
     const sub = await SubscriptionManager.subscriptions(owner, serviceId);
+
+    console.log("sub", sub);
 
     expect(sub.active).to.equal(true);
   });

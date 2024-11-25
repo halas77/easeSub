@@ -152,7 +152,7 @@ contract SubscriptionManager is Ownable, AccessControl {
         if (duration == Duration.Monthly) {
             return service.price;
         } else if (duration == Duration.Yearly) {
-            return (service.price * 12 * 7) / 10;
+            return (service.price * 12 * 70) / 100;
         } else {
             revert("Invalid duration type");
         }
