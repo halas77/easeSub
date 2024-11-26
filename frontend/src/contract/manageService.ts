@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import { getContract } from ".";
 
 export const getServiceId = async () => {
@@ -12,11 +11,9 @@ export const getServiceId = async () => {
 export const createNewService = async (price: string) => {
   const contract = await getContract();
 
-  const parsedValue = ethers.utils.parseEther(price);
-
   try {
     console.log("price", price);
-    const res = await contract.createService(parsedValue);
+    const res = await contract.createService(price);
     await res.wait();
 
     return res;

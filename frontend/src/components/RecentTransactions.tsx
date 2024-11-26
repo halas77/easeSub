@@ -19,6 +19,9 @@ const RecentTransactions = () => {
       .select("*")
       .eq("subscriber", account);
 
+      console.log('data', data)
+
+
     setTransactions(data || []);
     setLoading(false);
   };
@@ -52,8 +55,8 @@ const RecentTransactions = () => {
                 amount={item.price}
                 company={item.name}
                 date={formatDate(item.created_at)}
-                type="deposit"
                 key={idx}
+                txHash={item.transactionHash}
               />
             ))}
         </div>

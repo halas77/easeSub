@@ -61,29 +61,33 @@ const SubscriptionDetailCard = ({
 
       const serviceId = sub.serviceId;
       const duration = index;
+      const price = data.price;
 
-      await createNewSub({ serviceId, duration });
+      const res = await createNewSub({ serviceId, duration, price });
 
-      const { error } = await supabase.from("subscriptions").insert(data);
-
-      if (error) {
-        console.error("Supabase insertion error:", error);
-        toast.error("Failed to create subscription.");
-      } else {
-        const txData = {
-          name: sub.name,
-          price: data.price,
-          subscriber: data.subscriber,
-        };
-
-        const { error } = await supabase.from("transactions").insert(txData);
+      if (res) {
+        const { error } = await supabase.from("subscriptions").insert(data);
 
         if (error) {
           console.error("Supabase insertion error:", error);
           toast.error("Failed to create subscription.");
-          return;
+        } else {
+          const txData = {
+            name: sub.name,
+            price: data.price,
+            subscriber: data.subscriber,
+            transactionHash: res.transactionHash,
+          };
+
+          const { error } = await supabase.from("transactions").insert(txData);
+
+          if (error) {
+            console.error("Supabase insertion error:", error);
+            toast.error("Failed to create subscription.");
+            return;
+          }
+          toast.success("Subscription created successfully.");
         }
-        toast.success("Subscription created successfully.");
       }
     } catch (error) {
       console.error("Unexpected error:", error);
@@ -109,7 +113,7 @@ const SubscriptionDetailCard = ({
 
             <div className="mt-5">
               <span className="text-5xl font-bold text-indigo-600">
-                $ {index === 0 ? `${sub.price}` : yearlyPrice}
+                $ {index === 0 ? `${sub.price}.99` : yearlyPrice}
               </span>
               <span className="ms-3 text-gray-500 text-base">USDe</span>
             </div>

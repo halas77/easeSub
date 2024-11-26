@@ -11,6 +11,7 @@ export interface TrasactionsTypes {
   name: string;
   price: string;
   created_at: string;
+  transactionHash: string
 }
 
 export interface UpcomingCardProp {

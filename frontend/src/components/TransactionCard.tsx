@@ -1,18 +1,24 @@
 import { GrTransaction } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 interface TransactionCardProps {
   company: string;
   date: string;
   amount: string;
+  txHash: string;
 }
 
 const TransactionCard = ({
   company,
   date,
   amount,
+  txHash,
 }: TransactionCardProps) => {
   return (
-    <div className="flex items-center gap-4 py-3 px-2 bg-white rounded duration-200 w-full">
+    <Link
+      to={`https://sepolia.etherscan.io/tx/${txHash}`}
+      className="flex items-center gap-4 py-3 px-2 bg-white  duration-200 w-full hover:bg-gray-50 rounded-xl"
+    >
       <div className="flex justify-between gap-4 w-full">
         <div
           className={`w-12 h-12 flex justify-center items-center rounded-full ${"bg-green-100 text-green-600"}`}
@@ -26,8 +32,8 @@ const TransactionCard = ({
         </div>
       </div>
 
-      <div className={`font-semibold ${"text-green-600"}`}>${amount}</div>
-    </div>
+      <div className={`font-semibold ${"text-green-600"}`}>${amount}.99</div>
+    </Link>
   );
 };
 
