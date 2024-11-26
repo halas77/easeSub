@@ -4,8 +4,6 @@ pragma solidity ^0.8.24;
 import "./SubscriptionManager.sol";
 
 contract DynamicPricing is SubscriptionManager {
-    constructor(IERC20 _usdeToken) SubscriptionManager(_usdeToken) {}
-
     function setServicePrice(uint8 _serviceId, uint128 newPrice) external {
         Service storage service = services[_serviceId];
         require(
