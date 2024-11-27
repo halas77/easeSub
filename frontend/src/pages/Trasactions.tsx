@@ -46,6 +46,7 @@ const Trasactions = () => {
           <div className="flex flex-col divide-y w-full bg-white rounded-3xl p-4 max-w-4xl">
             {transactions.map((item, idx) => (
               <TransactionCard
+                txHash={item.transactionHash}
                 amount={item.price}
                 company={item.name}
                 date={formatDate(item.created_at)}
