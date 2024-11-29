@@ -17,6 +17,8 @@ const TransactionCard = ({
   return (
     <Link
       to={`https://sepolia.etherscan.io/tx/${txHash}`}
+      rel="noopener noreferrer"
+      target="_blank"
       className="flex items-center gap-4 py-3 px-2 bg-white  duration-200 w-full hover:bg-gray-50 rounded-xl"
     >
       <div className="flex justify-between gap-4 w-full">
