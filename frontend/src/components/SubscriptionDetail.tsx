@@ -18,7 +18,7 @@ const SubscriptionDetail = ({ sub }: SubscriptionDetailTypes) => {
 
             <div className="mt-5">
               <span className="text-5xl font-bold text-indigo-600">
-                $ {sub?.price}
+                $ {sub?.price}{sub?.duration === "Monthly" && ".99"}
               </span>
               <span className="ms-3 text-gray-500 text-base">USDe</span>
             </div>

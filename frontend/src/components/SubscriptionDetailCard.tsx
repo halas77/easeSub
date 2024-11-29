@@ -140,7 +140,7 @@ const SubscriptionDetailCard = ({
           onClick={() => handleCreateSubscription(index)}
           className="py-3 mt-5 px-4 items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 bg-indigo-700 text-gray-50 shadow-sm hover:bg-indigo-500 disabled:opacity-50 disabled:pointer-events-none text-center w-full"
         >
-          {loading ? "Processing" : "Subscribe"}
+          {loading ? "Processing..." : "Subscribe"}
         </button>
       </div>
     </div>
