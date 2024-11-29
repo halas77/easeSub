@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { getContract } from ".";
 
-export const createNewSub = async ({
+export const CreateNewSub = async ({
   serviceId,
   duration,
   price,
@@ -16,6 +16,22 @@ export const createNewSub = async ({
     const res = await contract.createSubscription(serviceId, duration, {
       value: parsedPrice,
     });
+
+    const tx = await res.wait();
+
+    return tx;
+  } catch (error) {
+    console.log("error", error);
+    toast.error("An unexpected error occurred");
+  }
+};
+
+export const CancelSub = async (serviceId: number) => {
+  const contract = await getContract();
+  try {
+    console.log("serviceId", serviceId);
+
+    const res = await contract.cancelSubscription(serviceId);
 
     const tx = await res.wait();
 

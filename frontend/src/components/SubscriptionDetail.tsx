@@ -1,12 +1,46 @@
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { SubscribedService } from "../utils/types";
 import { formatDate } from "../utils/lib";
+import { CancelSub } from "../contract/manageSub";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../supabaseClient";
+import { useState } from "react";
 
 interface SubscriptionDetailTypes {
   sub: SubscribedService | undefined;
 }
 
 const SubscriptionDetail = ({ sub }: SubscriptionDetailTypes) => {
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+  const cancelSubscription = async () => {
+    setLoading(true);
+    try {
+      const res = await CancelSub(sub?.services.serviceId || 0);
+
+      if (res) {
+        const { error } = await supabase
+          .from("subscriptions")
+          .update({ active: false })
+          .eq("id", sub?.id);
+
+        if (error) {
+          toast.error("Unable to cancel subscription.");
+          setLoading(false);
+          return;
+        }
+        toast.success("Subscription cancelled successfully.");
+        navigate("/subscriptions");
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log("error", error);
+      toast.error("Unable to cancel subscription.");
+    }
+  };
   return (
     <div>
       <div className="p-4 relative bg-white border border-gray-100 rounded-3xl md:p-10 ">
@@ -18,7 +52,8 @@ const SubscriptionDetail = ({ sub }: SubscriptionDetailTypes) => {
 
             <div className="mt-5">
               <span className="text-5xl font-bold text-indigo-600">
-                $ {sub?.price}{sub?.duration === "Monthly" && ".99"}
+                $ {sub?.price}
+                {sub?.duration === "Monthly" && ".99"}
               </span>
               <span className="ms-3 text-gray-500 text-base">USDe</span>
             </div>
@@ -46,12 +81,24 @@ const SubscriptionDetail = ({ sub }: SubscriptionDetailTypes) => {
           </span>
         </div>
 
-        <button
-          type="submit"
-          className="py-3 mt-5 px-4 items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 bg-red-100 text-red-700 shadow-sm hover:bg-red-200 disabled:opacity-50  ease-in-out duration-200 disabled:pointer-events-none text-center w-full"
-        >
-          Cancel Plan
-        </button>
+        <div className="lg:flex lg:gap-8">
+          <button
+            type="submit"
+            disabled={loading}
+            onClick={cancelSubscription}
+            className="py-3 mt-5 px-4 items-center gap-x-2 text-sm font-medium rounded-xl border border-red-200 bg-red-100 text-red-700 shadow-sm hover:bg-red-200 disabled:opacity-50  ease-in-out duration-200 disabled:pointer-events-none text-center w-full"
+          >
+            {loading ? "Canceling" : "Cancel Plan"}
+          </button>
+          <button
+            type="submit"
+            disabled
+            title="The deadline has not passed yet."
+            className="py-3 mt-5 px-4 items-center gap-x-2 text-sm font-medium rounded-xl border border-green-200 bg-green-100 text-green-700 shadow-sm hover:bg-green-200 disabled:opacity-50 ease-in-out duration-200 text-center w-full disabled:cursor-not-allowed"
+          >
+            {loading ? "Processing..." : "Extend Plan"}
+          </button>
+        </div>
       </div>
     </div>
   );

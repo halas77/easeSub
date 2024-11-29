@@ -5,7 +5,7 @@ import { addDays } from "../utils/lib";
 import { toast } from "react-toastify";
 import { supabase } from "../supabaseClient";
 import { useMainContext } from "../context/MainContext";
-import { createNewSub } from "../contract/manageSub";
+import { CreateNewSub } from "../contract/manageSub";
 
 const SubscriptionDetailCard = ({
   sub,
@@ -63,7 +63,7 @@ const SubscriptionDetailCard = ({
       const duration = index;
       const price = data.price;
 
-      const res = await createNewSub({ serviceId, duration, price });
+      const res = await CreateNewSub({ serviceId, duration, price });
 
       if (res) {
         const { error } = await supabase.from("subscriptions").insert(data);

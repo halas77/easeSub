@@ -18,7 +18,8 @@ const MySubscriptions = () => {
     const { data } = await supabase
       .from("subscriptions")
       .select(`*, services(*)`)
-      .eq("subscriber", account);
+      .eq("subscriber", account)
+      .eq("active", true);
 
     setServices(data || []);
     setLoading(false);
