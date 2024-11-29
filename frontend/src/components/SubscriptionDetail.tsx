@@ -1,7 +1,7 @@
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { SubscribedService } from "../utils/types";
 import { formatDate } from "../utils/lib";
-import { CancelSub } from "../contract/manageSub";
+import { CancelSub, ExecuteSub } from "../contract/manageSub";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
@@ -41,6 +41,15 @@ const SubscriptionDetail = ({ sub }: SubscriptionDetailTypes) => {
       toast.error("Unable to cancel subscription.");
     }
   };
+
+  const executeSubscription = async () => {
+    try {
+      await ExecuteSub(sub?.services.serviceId || 0);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <div>
       <div className="p-4 relative bg-white border border-gray-100 rounded-3xl md:p-10 ">
@@ -88,15 +97,16 @@ const SubscriptionDetail = ({ sub }: SubscriptionDetailTypes) => {
             onClick={cancelSubscription}
             className="py-3 mt-5 px-4 items-center gap-x-2 text-sm font-medium rounded-xl border border-red-200 bg-red-100 text-red-700 shadow-sm hover:bg-red-200 disabled:opacity-50  ease-in-out duration-200 disabled:pointer-events-none text-center w-full"
           >
-            {loading ? "Canceling" : "Cancel Plan"}
+            {loading ? "Canceling..." : "Cancel Plan"}
           </button>
           <button
             type="submit"
             disabled
+            onClick={executeSubscription}
             title="The deadline has not passed yet."
             className="py-3 mt-5 px-4 items-center gap-x-2 text-sm font-medium rounded-xl border border-green-200 bg-green-100 text-green-700 shadow-sm hover:bg-green-200 disabled:opacity-50 ease-in-out duration-200 text-center w-full disabled:cursor-not-allowed"
           >
-            {loading ? "Processing..." : "Extend Plan"}
+            Extend Plan
           </button>
         </div>
       </div>

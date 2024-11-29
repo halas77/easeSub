@@ -41,3 +41,18 @@ export const CancelSub = async (serviceId: number) => {
     toast.error("An unexpected error occurred");
   }
 };
+
+export const ExecuteSub = async (serviceId: number) => {
+  const contract = await getContract();
+  try {
+    console.log("contract", contract);
+
+    const res = await contract.executePayment(serviceId);
+    const tx = await res.wait();
+
+    return tx;
+  } catch (error) {
+    console.log("error", error);
+    toast.error("An unexpected error occurred");
+  }
+};
