@@ -24,7 +24,7 @@ const UpcomingCard = ({
 
         <div className="text-xs flex justify-center gap-2">
           <p className="font-bold text-3xl">
-            {price} <span className="text-base font-normal">USDe</span>{" "}
+            ${price} <span className="text-base font-normal">USDe</span>{" "}
           </p>
         </div>
       </div>

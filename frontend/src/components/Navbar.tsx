@@ -5,6 +5,7 @@ import { FiLogOut } from "react-icons/fi";
 import { dashboardContent } from "../utils/constants";
 import { RiExchangeLine } from "react-icons/ri";
 import { FaSearch, FaUserCircle } from "react-icons/fa";
+import { useMainContext } from "../context/MainContext";
 
 interface NavbarProps {
   className?: string;
@@ -16,6 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
   const [searchValue, setSearchValue] = useState("");
 
   const navigate = useNavigate();
+  const { disconnectWallet } = useMainContext();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -101,6 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
                   </Link>
                 ))}
                 <li
+                  onClick={disconnectWallet}
                   className={`py-3 px-4 hover:bg-gray-100 text-sm text-gray-800 cursor-pointer flex items-center gap-3 transition-all duration-150 ease-in-out`}
                 >
                   <FiLogOut className="text-gray-950  transition duration-150" />

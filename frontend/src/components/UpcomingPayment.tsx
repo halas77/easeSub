@@ -20,6 +20,7 @@ const UpcomingPayment = () => {
       .from("subscriptions")
       .select(`*, services(*)`)
       .eq("subscriber", account)
+      .eq("active", true)
       .order("nextPaymentDate", { ascending: false })
       .limit(1)
       .single();
@@ -35,7 +36,7 @@ const UpcomingPayment = () => {
     <div className="pt-10 space-y-3 w-full">
       <p className="font-semibold text-xl text-gray-700">Upcoming fee</p>
       <p className="text-xs text-gray-500 pb-2">
-      Preview for pending payment obligations.
+        Preview for pending payment obligations.
       </p>
       {loading ? (
         <UpcomingCardSkeleton />
