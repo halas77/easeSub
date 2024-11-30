@@ -37,30 +37,6 @@ We appreciate your understanding and look forward to showcasing our work! 🚀
 #### User-Friendly Interface 🖥️:
 - The platform provides a simple, intuitive, and responsive interface for users to manage their subscriptions, connect their wallets, and track their payment status 📲.
 
-### Key Features ✨
-
-#### Service Subscription Management 📅:
-- **Flexible Plans**: Users can subscribe to various services with monthly or yearly plans 🔄.
-- **Payment Tracking**: Each subscription has its due date, amount, and next payment date clearly displayed 📊. The system tracks payment history and notifies users before renewal 🔔.
-- **Service Access**: Subscription validity is tied to blockchain transactions, ensuring transparency in service access 🔍.
-
-#### Transparent Blockchain-based Payments 🔗:
-- Payments for subscriptions are logged on the **Ethereum blockchain**, ensuring that all transactions are publicly verifiable and irreversible 🔒.
-
-#### Real-Time Subscription Management ⏱️:
-- Users can view active subscriptions, payment history, and upcoming due dates in real-time ⏳.
-- **Notifications**: Automatic reminders for payment due dates 🔔.
-
-#### Smart Contract Automation 🤖:
-- Subscription renewals and cancellations are handled via **Ethereum smart contracts**, reducing manual intervention and improving efficiency ⚙️.
-
-#### Secure Wallet Integration with MetaMask 🔐:
-- Users can connect their **MetaMask** wallets for secure authentication 🛡️.
-- Transactions (such as subscription payments and renewals) are executed on the blockchain, ensuring transparency and security 🔑.
-
-#### User-Friendly Interface 🖥️:
-- The platform provides a simple, intuitive, and responsive interface for users to manage their subscriptions, connect their wallets, and track their payment status 📲.
-
 
 ### Technical Stack 🛠️
 
