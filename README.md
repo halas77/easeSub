@@ -8,7 +8,7 @@ Say goodbye to volatility and high fees 🙌, and hello to the future of recurri
 
 During our participation in the Ethena Hackathon, we faced challenges with deployment and using **USDe as a currency**. This was due to the unavailability of the Ethena testnet and faucet in our country, Ethiopia.  
 
-After consulting with the Ethena team, we were advised to switch to an alternative testnet and currency. We've adapted accordingly and continued development to ensure our project remains on track.  
+After consulting with the Ethena team, we switched to an alternative testnet and currency, assuming USDe functionality for consistency as we continue development. 
 
 We appreciate your understanding and look forward to showcasing our work! 🚀  
 
