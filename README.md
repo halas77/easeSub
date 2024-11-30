@@ -2,6 +2,15 @@
 
 The subscription economy is booming, projected to reach $1.5 trillion by 2025. EaseSub leverages Web3 and the stability of Ethena's USDe stablecoin to transform subscription payments—offering a seamless, transparent, and borderless platform. Say goodbye to volatility and high fees, and hello to the future of recurring services.
 
+### Note on Deployment Challenges
+
+During our participation in the Ethena Hackathon, we faced challenges with deployment and using **USDe as a currency**. This was due to the unavailability of the Ethena testnet and faucet in our country, Ethiopia.  
+
+After consulting with the Ethena team, we were advised to switch to an alternative testnet and currency. We've adapted accordingly and continued development to ensure our project remains on track.  
+
+We appreciate your understanding and look forward to showcasing our work! 🚀  
+
+
 ### Key Features
 
 #### Service Subscription Management:
