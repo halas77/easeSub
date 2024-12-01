@@ -1,3 +1,12 @@
+![Screenshot 2024-12-01 155547](https://github.com/user-attachments/assets/84802fb9-12a4-46a7-9ff7-e9b9f3d505f5)
+![Screenshot 2024-12-01 155619](https://github.com/user-attachments/assets/099e3b2c-4c31-49a3-b9ac-42a2c66c2b2c)
+![Screenshot 2024-12-01 155635](https://github.com/user-attachments/assets/2c77e339-95dc-42c1-b080-610f4661cf54)
+![Screenshot 2024-12-01 155712](https://github.com/user-attachments/assets/6672d373-5ab7-4548-ab7a-ebf38f2cf850)
+![Screenshot 2024-12-01 155651](https://github.com/user-attachments/assets/037401af-78f5-40d3-a3f7-328480864a25)
+![Screenshot 2024-12-01 155726](https://github.com/user-attachments/assets/c7c79945-5fba-4068-aa08-aa3fd6615f0b)
+![Screenshot 2024-12-01 155701](https://github.com/user-attachments/assets/a2143b8b-d6c1-4203-8916-d01e3f0c359b)
+
+
 # EaseSub - Subscription Management Platform
 
 The subscription economy is booming, projected to reach **$1.5 trillion by 2025** 📈. EaseSub leverages **Web3** and the stability of **Ethena's USDe stablecoin** to transform subscription payments—offering a seamless, transparent, and borderless platform 🌐.  
