@@ -40,6 +40,13 @@ We appreciate your understanding and look forward to showcasing our work! 🚀
 #### User-Friendly Interface 🖥️:
 - The platform provides a simple, intuitive, and responsive interface for users to manage their subscriptions, connect their wallets, and track their payment status 📲.
 
+## Features in Progress
+
+We are actively enhancing the platform with the following features to provide a more robust and versatile subscription management experience:
+
+- **Integration of DeFi Protocols**: Expanding functionality by incorporating decentralized financial services to offer users more flexibility and financial autonomy.
+- **Credit System**: Introducing a subscription-based credit mechanism to allow users to manage payments seamlessly, even during periods of insufficient funds.
+- **Liquidity Management**: Developing tools to optimize liquidity allocation for service providers, ensuring a smoother payment cycle and financial stability.
 
 ### Technical Stack 🛠️
 
